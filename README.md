@@ -10,5 +10,5 @@ and its equating for the sequences using one EOS, which are produced by NSSS; la
 the residuals between each set of sequences and the best fit surface of all the ten EOS sequences. 
 
 To run it from the Terminal the following command line is used 
-> python NSS_Plots.py
+python NSS_Plots.py
 type an integer number and "enter" to obtain the chosen plot from a list on the terminal.
