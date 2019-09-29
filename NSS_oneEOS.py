@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
-fig = plt.figure(figsize = (9,7))
+fig = plt.figure(figsize = (11,9))
 
 # File to read the data from
 filename = 'NS_data_eosABPR1.txt'
@@ -99,6 +99,7 @@ if method == 1:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mass_ec.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 2:
@@ -108,6 +109,7 @@ elif method == 2:
     plt.legend(fontsize='15')
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mass_Radius.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 3:
@@ -117,6 +119,7 @@ elif method == 3:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Freq_Mass.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 4:
@@ -126,6 +129,7 @@ elif method == 4:
     plt.legend(fontsize='15')
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mstat-frac_freq.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 5:
@@ -135,6 +139,7 @@ elif method == 5:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mstat-frac_Ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 6:
@@ -144,6 +149,7 @@ elif method == 6:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('M0-frac_freq.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 7:
@@ -153,6 +159,7 @@ elif method == 7:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('M0-frac_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
   
 elif method == 8:
@@ -162,6 +169,7 @@ elif method == 8:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('M-Mmax_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 9:
@@ -171,6 +179,7 @@ elif method == 9:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('R-frac_freq.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 10:
@@ -180,6 +189,7 @@ elif method == 10:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('R-frac_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
 
     
@@ -190,6 +200,7 @@ elif method == 11:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Compac_freq.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 12:
@@ -199,6 +210,7 @@ elif method == 12:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Compac_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 13:
@@ -208,6 +220,7 @@ elif method == 13:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('freq_ang-mom.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 14:
@@ -217,6 +230,7 @@ elif method == 14:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('freq_T-W.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 15:
@@ -228,6 +242,7 @@ elif method == 15:
     plt.gca().invert_xaxis()
     ax.view_init(azim=110)
     plt.legend()
+    plt.savefig('3d-Freq_comp-max_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 16:
@@ -239,6 +254,7 @@ elif method == 16:
     ax.view_init(azim=90)
     plt.gca().invert_xaxis()
     plt.legend()
+    plt.savefig('3d-Kerr-par_norm-M_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 17:
@@ -248,6 +264,7 @@ elif method == 17:
     ax.set_ylabel(r'$\zeta$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    plt.savefig('3d-norm-M_dim-comp_dim-Ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 18:
@@ -258,6 +275,7 @@ elif method == 18:
     ax.set_zlabel(r'$(R-R_*)/R_*$', fontsize='15')
     plt.gca().invert_yaxis()
     plt.legend()
+    plt.savefig('3d-R-frac_dim-Comp_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 19:
@@ -268,6 +286,7 @@ elif method == 19:
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-Mstat-frac_Dim-comp_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 20:
@@ -278,6 +297,7 @@ elif method == 20:
     ax.set_zlabel(r'$(M_0-M)/M_0$', fontsize='15')
     plt.gca().invert_yaxis()
     plt.legend()
+    plt.savefig('3d-M0-frac_dim-comp_dim-ang-Vel.png', format = 'png', transparent=False)
     plt.show()
     
 #############################
@@ -289,6 +309,7 @@ elif method == 21:
     ax.set_ylabel(r'$MR*/RM*$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    plt.savefig('3d-M-Mmax_norm-Comp_dim-Ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 22:
@@ -299,6 +320,7 @@ elif method == 22:
     ax.set_zlabel(r'$(R-R_*)/R_*$', fontsize='15')
     plt.gca().invert_yaxis()
     plt.legend()
+    plt.savefig('3d-R-Frac_Norm-comp_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 23:
@@ -309,6 +331,7 @@ elif method == 23:
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-Mstat-frac_Norm-Comp_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 24:
@@ -319,6 +342,7 @@ elif method == 24:
     ax.set_zlabel(r'$(M_0-M)/M_0$', fontsize='15')
     plt.gca().invert_yaxis()
     plt.legend()
+    plt.savefig('3D-M0_Norm-comp_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 #############################
@@ -330,6 +354,7 @@ elif method == 25:
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    plt.savefig('3d-M-Mmax_Comp-max_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 26:
@@ -341,6 +366,7 @@ elif method == 26:
     plt.gca().invert_xaxis()
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-R-frac_Comp-max_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 27:
@@ -351,6 +377,7 @@ elif method == 27:
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-Mstat-Frac_Comp-max_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 28:
@@ -362,6 +389,7 @@ elif method == 28:
     plt.gca().invert_yaxis()
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-M0-Frac_Comp-max_dim-ang-vel.png', format = 'png', transparent=False)
     plt.show()
         
 else:

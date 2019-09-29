@@ -86,6 +86,7 @@ if method == 1:
     ax1.view_init(azim=220)
     #ax1.view_init(elev=0)
     plt.legend()
+    plt.savefig('M0-frac-residuals.png', format = 'png', transparent=False)
     plt.show()
 
 
@@ -114,6 +115,7 @@ elif method == 2:
     ax1.view_init(azim=220)
     #ax1.view_init(elev=0)
     plt.legend()
+    plt.savefig('Mstat-frac-residuals.png', format = 'png', transparent=False)
     plt.show()
 
 
@@ -142,6 +144,7 @@ elif method == 3:
     ax1.view_init(azim=220)
     #ax1.view_init(elev=0)
     plt.legend()
+    plt.savefig('Rstat-frac-residuals.png', format = 'png', transparent=False)
     plt.show()
 
 

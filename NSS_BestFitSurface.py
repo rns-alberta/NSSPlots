@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 
 import matplotlib.pyplot as plt
-from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D
+#from matplotlib import cm
+#from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn import linear_model
 
+# Size of the figure
 fig = plt.figure(figsize = (9,7))
 
 filename = 'NS_data_eosBBB1.txt'  #NS_data_eosBBB1
@@ -84,6 +85,7 @@ print('Choose the best surface to generate (Choose only integer numbers)')
 print('1. For (M0-M)/M0')
 print('2. For (M-M*)/M*')
 print('3. For (R-R*)/R*')
+print('4. For M/Mmax')
 
 # Choose the ssurface plot to make
 method = input()
@@ -108,10 +110,13 @@ if method == 1:
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$(M_0-M)/M_0$', fontsize='15')
     plt.legend()
+    #Rotation angle
     # ax.view_init(azim=140)
+    #Limits in axes
     #ax.axes.set_xlim3d(left=0, right=100) 
     #ax.axes.set_ylim3d(bottom=0, top=2) 
     #ax.axes.set_zlim3d(bottom=0, top=100)
+    plt.savefig('M0-frac-bestfitsurface.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 2:
@@ -127,10 +132,13 @@ elif method == 2:
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
     plt.legend()
+    #Rotation angle
     # ax.view_init(azim=140)
+    #Limits in axes
     #ax.axes.set_xlim3d(left=0, right=100) 
     #ax.axes.set_ylim3d(bottom=0, top=2) 
     #ax.axes.set_zlim3d(bottom=0, top=100)
+    plt.savefig('Mstat-frac-bestfitsurface.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 3:
@@ -146,10 +154,13 @@ elif method == 3:
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$(R-R_*)/R_*$', fontsize='15')
     plt.legend()
+    #Rotation angle
     # ax.view_init(azim=140)
+    #Limits in axes
     #ax.axes.set_xlim3d(left=0, right=100) 
     #ax.axes.set_ylim3d(bottom=0, top=2) 
     #ax.axes.set_zlim3d(bottom=0, top=100)
+    plt.savefig('Rstat-frac-bestfitsurface.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 4:
@@ -165,10 +176,13 @@ elif method == 4:
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    #Rotation angle
     # ax.view_init(azim=140)
+    #Limits in axes
     #ax.axes.set_xlim3d(left=0, right=100) 
     #ax.axes.set_ylim3d(bottom=0, top=2) 
     #ax.axes.set_zlim3d(bottom=0, top=100)
+    plt.savefig('M-Mmax-bestfitsurface.png', format = 'png', transparent=False)
     plt.show()
 
 else:

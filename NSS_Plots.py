@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 
-fig = plt.figure(figsize = (9,7))
+# Size of the figure
+fig = plt.figure(figsize = (11,9))
 
 # Files to read the data from
 dataAB1 = np.loadtxt('NS_data_eosABPR1.txt', unpack=True)
@@ -339,7 +340,7 @@ print('---------------------------------------------------------------')
 
 # Choose the number of the desired plot 
 method = input()
-#method = 2
+#method = 1
 
 if method == 1:
     plt.scatter(ec_AB1/10**15, M_AB1, s=3, label = 'EOS ABPR1')
@@ -357,6 +358,7 @@ if method == 1:
     plt.legend(loc='best')
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mass_ec_alleos.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 2:
@@ -375,6 +377,7 @@ elif method == 2:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mass_Radius_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 3:
@@ -393,6 +396,7 @@ elif method == 3:
     plt.legend(loc='best')
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Freq_Mass_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 4:
@@ -411,6 +415,7 @@ elif method == 4:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mstat-frac_freq_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 5:
@@ -429,6 +434,7 @@ elif method == 5:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Mstat-frac_Ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 6:
@@ -447,6 +453,7 @@ elif method == 6:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('M0-frac_freq_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 7:
@@ -465,6 +472,7 @@ elif method == 7:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('M0-frac_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
   
 elif method == 8:
@@ -483,6 +491,7 @@ elif method == 8:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('M-Mmax_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 9:
@@ -501,6 +510,7 @@ elif method == 9:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('R-frac_freq_alleos.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 10:
@@ -519,6 +529,7 @@ elif method == 10:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('R-frac_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 11:
@@ -537,6 +548,7 @@ elif method == 11:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Compac_freq_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 12:
@@ -555,6 +567,7 @@ elif method == 12:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('Compac_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 13:
@@ -573,6 +586,7 @@ elif method == 13:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('freq_ang-mom_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 14:
@@ -591,6 +605,7 @@ elif method == 14:
     plt.legend()
     plt.xticks(fontsize = 12)
     plt.yticks(fontsize = 12)
+    plt.savefig('freq_T-W_alleos.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 15:
@@ -611,6 +626,7 @@ elif method == 15:
     plt.gca().invert_xaxis()
     ax.view_init(azim=110)
     plt.legend()
+    plt.savefig('3d-Freq_comp-max_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
 
 elif method == 16:
@@ -631,6 +647,7 @@ elif method == 16:
     #ax.view_init(azim=90)
     plt.gca().invert_xaxis()
     plt.legend()
+    plt.savefig('3d-Kerr-par_norm-M_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 17:
@@ -649,6 +666,7 @@ elif method == 17:
     ax.set_ylabel(r'$GM_*/R_*c^2$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    plt.savefig('3d-norm-M_dim-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 18:
@@ -669,6 +687,7 @@ elif method == 18:
     ax.view_init(azim=100)
     plt.gca().invert_yaxis()
     plt.legend(loc='upper left')
+    plt.savefig('3d-R-frac_dim-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 19:
@@ -688,7 +707,7 @@ elif method == 19:
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='20')
     ax.view_init(azim=145)
     plt.legend(loc='upper left')
-    plt.savefig('3dMassfrac.png', format = 'png', transparent=False)
+    plt.savefig('3d-Mstat-frac_dim-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 20:
@@ -709,6 +728,7 @@ elif method == 20:
 #    ax.view_init(azim=170)
     #plt.gca().invert_yaxis()
     plt.legend(loc='upper left')
+    plt.savefig('3d-M0-frac_dim-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 #############################
@@ -729,6 +749,7 @@ elif method == 21:
     ax.set_ylabel(r'$MR*/RM*$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    plt.savefig('3d-M-Mmax_norm-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 22:
@@ -748,6 +769,7 @@ elif method == 22:
     ax.set_zlabel(r'$(R-R_*)/R_*$', fontsize='15')
     plt.gca().invert_yaxis()
     plt.legend(loc='upper left')
+    plt.savefig('3d-R-frac_norm-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 23:
@@ -767,6 +789,7 @@ elif method == 23:
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-Mstat-frac_Norm-Comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 24:
@@ -786,6 +809,7 @@ elif method == 24:
     ax.set_zlabel(r'$(M_0-M)/M_0$', fontsize='15')
     plt.gca().invert_yaxis()
     plt.legend()
+    plt.savefig('3D-M0_Norm-comp_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
     
@@ -807,6 +831,7 @@ elif method == 25:
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
+    plt.savefig('3d-M-Mmax_Comp-max_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 26:
@@ -827,7 +852,7 @@ elif method == 26:
     plt.gca().invert_xaxis()
 #    ax.view_init(azim=145)
     plt.legend(loc='upper left')
-    plt.savefig('RadiusFrac_Om-sq-MaxComp.png', format='png', transparent=False)
+    plt.savefig('3d-R-frac_Comp-max_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 27:
@@ -845,9 +870,9 @@ elif method == 27:
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
-    plt.savefig('MassFrac_Om-sq-MaxComp.png', format='png')
     ax.view_init(azim=145)
     plt.legend(loc='best')
+    plt.savefig('3d-Mstat-Frac_Comp-max_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 elif method == 28:
@@ -868,6 +893,7 @@ elif method == 28:
     plt.gca().invert_yaxis()
     ax.view_init(azim=145)
     plt.legend()
+    plt.savefig('3d-M0-Frac_Comp-max_dim-ang-vel_alleos.png', format = 'png', transparent=False)
     plt.show()
     
 else:
