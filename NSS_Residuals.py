@@ -1,13 +1,14 @@
-#!/usr/bin/env python2
+
 # -*- coding: utf-8 -*-
 
+from builtins import input
 import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn import linear_model
-import numpy.polynomial.polynomial as poly
+#import numpy.polynomial.polynomial as poly
 
 fig = plt.figure(figsize = (9,7))
 ax1 = fig.add_subplot(111, projection='3d')
@@ -49,37 +50,109 @@ delta = Omega * ((rstat**3)/(G*mstat))**(0.5)   # Normalized omega
 m0 = M0 * 1.9884e33     # Baryonic mass
 normJ = (c*J)/(G*m0**2)     # Normalized angular momentum
 
-print('Choose the residual plor to generate (Choose only integer numbers)')
+##################################################
+
+data_all = np.loadtxt('NS_data_allEOS.txt', unpack=True)
+
+# Columns of data from the previous file 
+Ec_all = data_all[0,:]*10**15       # central energy density
+M_all= data_all[1,:]               # Total mass
+M0_all = data_all[2,:]              # Baryonic mass
+Mstat_all = data_all[3,:]           # Mass when the NS is not rotating 
+Mmax_all = data_all[4,:]            # Maximum mass for a given EOS
+R_all = data_all[5,:]               # Radius 
+Rratio_all = data_all[6,:]          # Ratio rp/re
+Rstat_all = data_all[7,:]           # Radius when the NS is not rotating
+Omega_all = data_all[8,:]*2*np.pi   # Angular velocity (rad/s), data[8,:] is spin frequency (in Hz)
+Klim_all = data_all[9,:]            # Kepler limit (Hz)
+J_all = data_all[10,:]              # Angular momentum
+T_all = data_all[11,:]              # Rotational kinetic energy
+W_all = data_all[12,:]              # Gravitational binding energy
+Rmax_all = data_all[13,:]           # Maximum radius for a given EOS
+Qmax_all = data_all[14,:]           # Ratio (MaxMass / MaxRadius) of the non rotating star
+
+# Converting quantities to CGS units
+m_all = M_all * 1.9884e33   # Mass
+r_all = R_all * 1.0e5       # Radius
+rstat_all = Rstat_all * 1.0e5   # Radius of the non rotating NS
+mstat_all = Mstat_all * 1.9884e33   # Mass of the non rotating NS
+delta_all = Omega_all * ((rstat_all**3)/(G*mstat_all))**(0.5)   # Normalized omega
+m0_all = M0_all * 1.9884e33     # Baryonic mass
+normJ_all = (c*J_all)/(G*m0_all**2)     # Normalized angular momentum
+
+def compute_surface(x, y, z):
+    # Converting each column of data in each axis into arrays
+    a1 = np.array(x)
+    a2 = np.array(y)
+    a3 = np.array(z)
+    # Coverting the arrays into coordinate points in 3D
+    datapoints = np.c_[a1,a2,a3]
+    # Assigning the set of the first two coordinates to an array, X, and  
+    # last coordinate to an array, Y
+    X = datapoints[:,0:2]
+    Y = datapoints[:,-1]
+    # Degree of the polynomial fitting equation of the surface
+    deg_of_poly = 4
+    poly = PolynomialFeatures(degree=deg_of_poly)
+    X_ = poly.fit_transform(X)
+    # Fitting the linear model
+    clf = linear_model.LinearRegression(fit_intercept=False)
+    clf.fit(X_, Y)
+    # Computing the surface
+    N = 30
+    Lengthx = 0.4
+    Lengthy = 1.0
+    predict_x0, predict_x1 = np.meshgrid(np.linspace(0, Lengthx, N), np.linspace(0, Lengthy, N))
+    predict_x = np.concatenate((predict_x0.reshape(-1, 1), predict_x1.reshape(-1, 1)), axis=1)
+    predict_x_ = poly.fit_transform(predict_x)
+    predict_y = clf.predict(predict_x_)
+
+    #print(poly.powers_)
+    coefs = clf.coef_
+    vari = poly.get_feature_names()
+    
+    return  predict_x0, predict_x, predict_y, predict_x1, coefs, vari
+
+
+
+print('Choose the residual plot to generate (Choose only integer numbers)')
 print('1. For (M0-M)/M0')
 print('2. For (M-M*)/M*')
 print('3. For (R-R*)/R*')
 
-# Choose the ssurface plot to make
-method = input()
-#method = 1
+# Choose the surface plot to make
+method = eval(input())
+#method = 3
 
 fil = filename.replace('NS_data_eos', '')
 name = fil.replace('.txt', '')
+
 
 if method == 1:
     x = delta**2
     y = G*mstat/(rstat*c**2)  
     z = (M0-M)/M0
 
-    resid = np.zeros(len(x))
+    resid2 = np.zeros(len(x))
 
+    predict_x0, predict_x, predict_y, predict_x1, coefs, vari = compute_surface(x, y, z)
+      
+    vari = [v.replace('^', '**') for v in vari]   
+    vari = [v.replace(' ', '*') for v in vari]      
+
+    a = 0
     for i in range(len(x)):
-        Xc = x[i]
-        Yc = y[i]
-        term1 =  -1.51950180e-02 -2.10584774e-01*Xc + 8.92558965e-01*Yc
-        term2 = 1.70935907*Xc**2 + 1.38563605*Xc*Yc -3.72546017*Yc**2
-        term3 = -5.45957168e+00*Xc**3 -6.44297945e+00*Xc**2*Yc -3.94675715e+00*Xc*Yc**2 + 1.59905891e+01*Yc**3  
-        term4 = 5.90617974e+00*Xc**4 + 9.34839417e+00*Xc**3*Yc + 3.94334721e+00*Xc**2*Yc**2 + 3.31392052e+00*Xc*Yc**3 -2.20445973e+01 *Yc**4
-        Zc =  term1 + term2 + term3 + term4
+        globals()[vari[1]] = x[i]      
+        globals()[vari[2]] = y[i]  
+        
+        for j in range(0, len(vari)):
+            a = a + ( eval(vari[j]) * coefs[j] )
 
-        resid[i] =  100*(z[i] - Zc)
-    
-    ax1.scatter(x, y, resid, marker='o', label=str(name))
+        resid2[i] = (z[i] - a)
+        if j == len(vari)-1:
+            a=0
+        
+    ax1.scatter(x, y, resid2, marker='o', label=str(name))
     ax1.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax1.set_ylabel(r'$GM_*/R_*c^2$', fontsize='15')
     ax1.set_zlabel(r'Residuals in $(M_0-M)/M_0$', fontsize='15')
@@ -95,20 +168,26 @@ elif method == 2:
     y = G*mstat/(rstat*c**2)
     z = (M-Mstat)/Mstat
 
-    resid = np.zeros(len(x))
+    resid2 = np.zeros(len(x))
 
+    predict_x0, predict_x, predict_y, predict_x1, coefs, vari = compute_surface(x, y, z)
+      
+    vari = [v.replace('^', '**') for v in vari]   
+    vari = [v.replace(' ', '*') for v in vari]      
+
+    a = 0
     for i in range(len(x)):
-        Xc = x[i]
-        Yc = y[i]
-        term1 =  -0.00368173 + 0.10930922*Xc + 0.033793*Yc
-        term2 = -0.96591924*Xc**2 -0.27353663*Xc*Yc -0.15198814*Yc**2
-        term3 = 2.90307002*Xc**3 +  2.73955588*Xc**2*Yc -0.25523957*Xc*Yc**2 + 0.49056401*Yc**3  
-        term4 = -2.97802269*Xc**4 -3.59644437*Xc**3*Yc + 0.08914017*Xc**2*Yc**2 + 2.69291532*Xc*Yc**3 -0.72895654*Yc**4
-        Zc =  term1 + term2 + term3 + term4
+        globals()[vari[1]] = x[i]      
+        globals()[vari[2]] = y[i]  
+        
+        for j in range(0, len(vari)):
+            a = a + ( eval(vari[j]) * coefs[j] )
 
-        resid[i] =  100*(z[i] - Zc)
-
-    ax1.scatter(x, y, resid, marker='o', label=str(name))
+        resid2[i] = (z[i] - a)
+        if j == len(vari)-1:
+            a=0
+        
+    ax1.scatter(x, y, resid2, marker='o', label=str(name))
     ax1.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax1.set_ylabel(r'$GM_*/R_*c^2$', fontsize='15')
     ax1.set_zlabel(r'Residuals in $(M_*-M)/M_*$', fontsize='15')
@@ -124,20 +203,26 @@ elif method == 3:
     y = (M/R)/Qmax
     z = (R-Rstat)/Rstat
 
-    resid = np.zeros(len(x))
+    resid2 = np.zeros(len(x))
 
+    predict_x0, predict_x, predict_y, predict_x1, coefs, vari = compute_surface(x, y, z)
+      
+    vari = [v.replace('^', '**') for v in vari]   
+    vari = [v.replace(' ', '*') for v in vari]      
+
+    a = 0
     for i in range(len(x)):
-        Xc = x[i]
-        Yc = y[i]
-        term1 =  -1.0790784  + 10.21820411*Xc +7.23015196*Yc
-        term2 = -44.71532998*Xc**2 -39.82600955*Xc*Yc -16.94487249*Yc**2
-        term3 = 121.99681083*Xc**3 + 73.35172903*Xc**2*Yc + 57.45075819*Xc*Yc**2 + 16.52530708 *Yc**3  
-        term4 = -118.46931729*Xc**4 -63.91197667*Xc**3*Yc -40.44452759*Xc**2*Yc**2 -27.00592591*Xc*Yc**3 -5.72330642*Yc**4
-        Zc =  term1 + term2 + term3 + term4
+        globals()[vari[1]] = x[i]      
+        globals()[vari[2]] = y[i]  
         
-        resid[i] =  100*(z[i] - Zc)
+        for j in range(0, len(vari)):
+            a = a + ( eval(vari[j]) * coefs[j] )
 
-    ax1.scatter(x, y, resid, marker='o', label=str(name))
+        resid2[i] = (z[i] - a)
+        if j == len(vari)-1:
+            a=0
+    
+    ax1.scatter(x, y, resid2, marker='o', label=str(name))
     ax1.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax1.set_ylabel(r'$(M/R)/(M_M/R_M)$', fontsize='15')
     ax1.set_zlabel(r'Residuals in $(R-R_*)/R_*$', fontsize='15')
