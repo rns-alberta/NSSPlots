@@ -1,6 +1,7 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
 
+# -*- coding: utf-8 -*-
+import future
+from builtins import input
 import matplotlib.pyplot as plt
 #from matplotlib import cm
 #from mpl_toolkits.mplot3d import Axes3D
@@ -10,6 +11,7 @@ from sklearn import linear_model
 
 # Size of the figure
 fig = plt.figure(figsize = (9,7))
+ax = fig.add_subplot(111, projection='3d')
 
 filename = 'NS_data_eosBBB1.txt'  #NS_data_eosBBB1
 data = np.loadtxt(str(filename), unpack=True)
@@ -88,7 +90,7 @@ print('3. For (R-R*)/R*')
 print('4. For M/Mmax')
 
 # Choose the ssurface plot to make
-method = input()
+method = eval(input())
 #method = 3
 
 if filename[8] == 'e':
@@ -103,7 +105,6 @@ if method == 1:
     z = (M0-M)/M0
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
     # Plotting surface and points
-    ax = fig.add_subplot(111, projection='3d')
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
@@ -125,7 +126,6 @@ elif method == 2:
     z = (M-Mstat)/Mstat
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
     # Plotting surface and points
-    ax = fig.add_subplot(111, projection='3d')
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
@@ -147,7 +147,6 @@ elif method == 3:
     z = (R-Rstat)/Rstat
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
     # Plotting surface and points
-    ax = fig.add_subplot(111, projection='3d')
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
@@ -169,7 +168,6 @@ elif method == 4:
     z = M/Mmax
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
     # Plotting surface and points
-    ax = fig.add_subplot(111, projection='3d')
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
