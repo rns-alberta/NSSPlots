@@ -13,7 +13,7 @@ from sklearn import linear_model
 fig = plt.figure(figsize = (9,7))
 ax1 = fig.add_subplot(111, projection='3d')
 
-filename = 'NS_data_eosBBB1.txt'
+filename = 'NS_data_eosAPR.txt'
 data = np.loadtxt(str(filename), unpack=True)
 
 fil = filename.replace('NS_data_eos', '')
@@ -50,35 +50,7 @@ delta = Omega * ((rstat**3)/(G*mstat))**(0.5)   # Normalized omega
 m0 = M0 * 1.9884e33     # Baryonic mass
 normJ = (c*J)/(G*m0**2)     # Normalized angular momentum
 
-##################################################
 
-data_all = np.loadtxt('NS_data_allEOS.txt', unpack=True)
-
-# Columns of data from the previous file 
-Ec_all = data_all[0,:]*10**15       # central energy density
-M_all= data_all[1,:]               # Total mass
-M0_all = data_all[2,:]              # Baryonic mass
-Mstat_all = data_all[3,:]           # Mass when the NS is not rotating 
-Mmax_all = data_all[4,:]            # Maximum mass for a given EOS
-R_all = data_all[5,:]               # Radius 
-Rratio_all = data_all[6,:]          # Ratio rp/re
-Rstat_all = data_all[7,:]           # Radius when the NS is not rotating
-Omega_all = data_all[8,:]*2*np.pi   # Angular velocity (rad/s), data[8,:] is spin frequency (in Hz)
-Klim_all = data_all[9,:]            # Kepler limit (Hz)
-J_all = data_all[10,:]              # Angular momentum
-T_all = data_all[11,:]              # Rotational kinetic energy
-W_all = data_all[12,:]              # Gravitational binding energy
-Rmax_all = data_all[13,:]           # Maximum radius for a given EOS
-Qmax_all = data_all[14,:]           # Ratio (MaxMass / MaxRadius) of the non rotating star
-
-# Converting quantities to CGS units
-m_all = M_all * 1.9884e33   # Mass
-r_all = R_all * 1.0e5       # Radius
-rstat_all = Rstat_all * 1.0e5   # Radius of the non rotating NS
-mstat_all = Mstat_all * 1.9884e33   # Mass of the non rotating NS
-delta_all = Omega_all * ((rstat_all**3)/(G*mstat_all))**(0.5)   # Normalized omega
-m0_all = M0_all * 1.9884e33     # Baryonic mass
-normJ_all = (c*J_all)/(G*m0_all**2)     # Normalized angular momentum
 
 def compute_surface(x, y, z):
     # Converting each column of data in each axis into arrays
@@ -133,7 +105,7 @@ if method == 1:
     y = G*mstat/(rstat*c**2)  
     z = (M0-M)/M0
 
-    resid2 = np.zeros(len(x))
+    resid = np.zeros(len(x))
 
     predict_x0, predict_x, predict_y, predict_x1, coefs, vari = compute_surface(x, y, z)
       
@@ -148,11 +120,11 @@ if method == 1:
         for j in range(0, len(vari)):
             a = a + ( eval(vari[j]) * coefs[j] )
 
-        resid2[i] = (z[i] - a)
+        resid[i] = (z[i] - a)
         if j == len(vari)-1:
             a=0
         
-    ax1.scatter(x, y, resid2, marker='o', label=str(name))
+    ax1.scatter(x, y, resid, marker='o', label=str(name))
     ax1.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax1.set_ylabel(r'$GM_*/R_*c^2$', fontsize='15')
     ax1.set_zlabel(r'Residuals in $(M_0-M)/M_0$', fontsize='15')
@@ -168,7 +140,7 @@ elif method == 2:
     y = G*mstat/(rstat*c**2)
     z = (M-Mstat)/Mstat
 
-    resid2 = np.zeros(len(x))
+    resid = np.zeros(len(x))
 
     predict_x0, predict_x, predict_y, predict_x1, coefs, vari = compute_surface(x, y, z)
       
@@ -183,11 +155,11 @@ elif method == 2:
         for j in range(0, len(vari)):
             a = a + ( eval(vari[j]) * coefs[j] )
 
-        resid2[i] = (z[i] - a)
+        resid[i] = (z[i] - a)
         if j == len(vari)-1:
             a=0
         
-    ax1.scatter(x, y, resid2, marker='o', label=str(name))
+    ax1.scatter(x, y, resid, marker='o', label=str(name))
     ax1.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax1.set_ylabel(r'$GM_*/R_*c^2$', fontsize='15')
     ax1.set_zlabel(r'Residuals in $(M_*-M)/M_*$', fontsize='15')
@@ -203,7 +175,7 @@ elif method == 3:
     y = (M/R)/Qmax
     z = (R-Rstat)/Rstat
 
-    resid2 = np.zeros(len(x))
+    resid = np.zeros(len(x))
 
     predict_x0, predict_x, predict_y, predict_x1, coefs, vari = compute_surface(x, y, z)
       
@@ -218,11 +190,11 @@ elif method == 3:
         for j in range(0, len(vari)):
             a = a + ( eval(vari[j]) * coefs[j] )
 
-        resid2[i] = (z[i] - a)
+        resid[i] = (z[i] - a)
         if j == len(vari)-1:
             a=0
     
-    ax1.scatter(x, y, resid2, marker='o', label=str(name))
+    ax1.scatter(x, y, resid, marker='o', label=str(name))
     ax1.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
     ax1.set_ylabel(r'$(M/R)/(M_M/R_M)$', fontsize='15')
     ax1.set_zlabel(r'Residuals in $(R-R_*)/R_*$', fontsize='15')

@@ -104,6 +104,7 @@ if method == 1:
     y = (M/R)/Qmax  #y = G*mstat/(rstat*c**2)
     z = (M0-M)/M0
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
+    print('where x0 = Omega^2 (R_*^3/GM_*), x1 = (M/R)/(M_M/R_M)')
     # Plotting surface and points
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
@@ -125,11 +126,12 @@ elif method == 2:
     y = (M/R)/Qmax
     z = (M-Mstat)/Mstat
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
+    print('where x0 = Omega^2 (R_*^3/GM_*), x1 = (M/R)/(M_M/R_M)')
     # Plotting surface and points
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
-    ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
+    ax.set_ylabel(r'$(M/R)/(M_{M}/R_{M})$', fontsize='15')
     ax.set_zlabel(r'$(M-M_*)/M_*$', fontsize='15')
     plt.legend()
     #Rotation angle
@@ -146,11 +148,12 @@ elif method == 3:
     y = (M/R)/Qmax 
     z = (R-Rstat)/Rstat
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
+    print('where x0 = Omega^2 (R_*^3/GM_*), x1 = (M/R)/(M_M/R_M)')
     # Plotting surface and points
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
-    ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
+    ax.set_ylabel(r'$(M/R)/(M_{M}/R_{M})$', fontsize='15')
     ax.set_zlabel(r'$(R-R_*)/R_*$', fontsize='15')
     plt.legend()
     #Rotation angle
@@ -167,11 +170,12 @@ elif method == 4:
     y = (M/R)/Qmax
     z = M/Mmax
     predict_x0, predict_x, predict_y, predict_x1 = compute_surface(x, y, z)
+    print('where x0 = Omega^2 (R_*^3/GM_*), x1 = (M/R)/(M_M/R_M)')
     # Plotting surface and points
     surf = ax.plot_surface(predict_x0, predict_x1, predict_y.reshape(predict_x0.shape), rstride=1, cstride=1, alpha=0.5)
     ax.scatter(x, y, z, c='b', marker='o', label=str(name))
     ax.set_xlabel(r'$\Omega^2 (R_*^3 / GM_*)$', fontsize='15')
-    ax.set_ylabel(r'$(M/R)/(M_{max}/R_{max})$', fontsize='15')
+    ax.set_ylabel(r'$(M/R)/(M_{M}/R_{M})$', fontsize='15')
     ax.set_zlabel(r'$M/M_{max}$', fontsize='15')
     plt.legend()
     #Rotation angle
