@@ -1,4 +1,4 @@
-# NSSPlots
+# NSSPlots (Neutron Star Spin Plots)
 
 This code makes use of the output files from the NSSS code that computes a series of constant 
 baryonic mass tracks of neutron stars with changing spin velocity.
