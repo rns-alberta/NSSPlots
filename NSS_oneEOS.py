@@ -6,6 +6,7 @@ of rotating neutron stars, and considering one EOS
 
 """
 
+import future
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
@@ -86,7 +87,7 @@ print('---------------------------------------------------------------')
 
 
 # Choose the number of the desired plot 
-method = input()
+method = eval(input())
 #method = 5
 
 fil = filename.replace('NS_data_eos', '')

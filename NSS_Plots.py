@@ -6,6 +6,7 @@ of rotating neutron stars, considering ten EOS
 
 """
 
+import future 
 import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
@@ -339,7 +340,7 @@ print('28. 3D plot of (M-M_0)/M_0, normalized omega and max normalized compactne
 print('---------------------------------------------------------------')
 
 # Choose the number of the desired plot 
-method = input()
+method = eval(input())
 #method = 1
 
 if method == 1:
